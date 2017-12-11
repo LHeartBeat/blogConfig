@@ -1,6 +1,6 @@
 ---
 title: github + hexo 创建博客
-date: 2017-6-11 16:18:38
+date: 2017-12-1 16:18:38
 categories: github
 tags:
 - github
@@ -72,7 +72,9 @@ deploy:
 ```
 ![panda](picture/panda.png)
 ```
-特别注意，图片的路径是相对路径。是相对xxx.md文件的路径
+<font color=#0099ff size=5 face="黑体">特别注意</font>
+
+图片的路径是相对路径。是相对xxx.md文件的路径
 
 比如
 - picture.md 文件的路径  E:\GitHub\blogConfig\Hexo\source\_posts\picture.md
