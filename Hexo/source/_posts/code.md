@@ -4,7 +4,8 @@ date: 2017-12-11 11:47:44 #文章生成時間
 categories: C #文章分類目錄 可以省略
 tags:
 - C
-description:  意想不到的C
+
+description:  意想不到的c
 ---
 
 ```c++
