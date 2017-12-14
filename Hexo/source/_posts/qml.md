@@ -19,15 +19,62 @@ tags:
 ![ff](qml/qmlscene.png)
 
 # qml的基本元素
+Item（基础元素对象）是所有可视化元素的基础对象，所有其它的可视化元素都继承自Item。它自身不会有任何绘制操作，但是定义了所有可视化元素共有的属性：
 
-- item
-- window
- 导入`import QtQuick.Window 2.2`模块，2.2是Qt模块的版本号
+| 分组 | 	属性 |
+| -- | -- |
+| Geometry（几何属性） | x,y（坐标）定义了元素左上角的位置，width，height（长和宽）定义元素的显示范围，z（堆叠次序）定义元素之间的重叠顺序。 |
+| Layout handling（布局操作）| anchors（锚定），包括左（left），右（right），上（top），下（bottom），水平与垂直居中（vertical center，horizontal center），与margins（间距）一起定义了元素与其它元素之间的位置关系。 |
+| Key handlikng（按键操作） | 附加属性key（按键）和keyNavigation（按键定位）属性来控制按键操作，处理输入焦点（focus）可用操作。 |
+| Transformation（转换） | 缩放（scale）和rotate（旋转）转换，通用的x,y,z属性列表转换（transform），旋转基点设置（transformOrigin）。 |
+| Visual（可视化） | 不透明度（opacity）控制透明度，visible（是否可见）控制元素是否显示，clip（裁剪）用来限制元素边界的绘制，smooth（平滑）用来提高渲染质量。 |
+| State definition（状态定义） | states（状态列表属性）提供了元素当前所支持的状态列表，当前属性的改变也可以使用transitions（转变）属性列表来定义状态转变动画。 |
 
-- image
 
-- 菜单
-## 注释符和C++一样
+## 可以通过`Qt creator`的调试状态查看元素的属性
+1. 新建一个qml工程
+在 __文件__  __新建文件或项目__ 对话框中，选择 __其他项目__,然后选择 __Qt Quick UI Prototype__
+![newproject](qml/newpro.png)
+例如以下Qml代码的属性
+```js
+import QtQuick 2.8
+import QtQuick.Window 2.2
+
+Window {
+    id: root
+    property int blurRadius: 0
+    Image {
+        id: pole
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        source: "images/pole.png"
+    }
+    MouseArea {
+        anchors.fill: parent
+        onPressed: {
+            wheel.rotation += 90
+            root.blurRadius = 16
+        }
+        onReleased: {
+            root.blurRadius = 0
+        }
+    }
+}
+```
+2. 启动调试
+![ts](qml/ts.png)
+3. 属性列表
+![属性列表](qml/sx.png)
+4. image的属性
+![imagesx](qml/imagesx.png)
+5. 鼠标区域的属性
+![mouse](qml/msx.png)
+
+6. qml必须导入 `QtQuick` ,导入方式`import QtQuick 2.8`
+使用Qt已有的组件需要导入相应的模块
+如使用`Window` 导入`import QtQuick.Window 2.2`模块，2.2是Qt模块的版本号
+
+## qml注释符和C++一样
 ```
  /* 这是一个多行注释
  和c语言的一样 */
@@ -39,7 +86,7 @@ tags:
 要使用QML进行界面的布局，首先需要理解QML元素的层次结构。QML的层次结构很简单，是一个树形结构，最外层必须有一个根元素，根元素里面可以嵌套一个或多个子元素，子元素里面还可以包含子元素。如果用图形画出来的话大概是这个样子。
  ![结构图](qml/zys.png)
 
-    anchor layout    
+使用`anchor`进行布局    
 
 
 # qml与C++的交互
