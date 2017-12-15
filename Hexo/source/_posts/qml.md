@@ -91,22 +91,34 @@ Window {
 
 # qml与C++的交互
 
+qml与C++交互的桥梁是 __QML引擎和元对象系统__
+
 [官方文档](http://doc.qt.io/qt-5/qtqml-cppintegration-topic.html)
 
-Qml文档：
-通过已有元素拼装新的控件元素
-UI布局 + UI动画 + UI状态和简单逻辑
-C++ ：
-Qml文档对应一个controller，一个model（可以不断分层，多个controller 多个model)
-Qml 里的UI数据通过属性绑定从model获取
-Qml 里的UI事件通过controller响应
+`qml` 跟`C++` 的交互方式主要有以下几种：
 
+1. 以直接在C++应用程序中加载qml文件，拿到界面各元素的指针，修改界面属性 __(在C++中，加载qml文件)__
+
+2. 可以将C++对象expose 到qml中，然后在qml文件中访问该对象的属性或调用对象的方法 __(在qml中，访问C++对象并调用C++方法)__
+
+3. 可以自定义C++类，把该类注册给qml类型系统，然后可以像其他内置类型那样在qml中使用 __(在qml中，使用导入的C++ 类型)__
+
+
+qml与C++结合的优势：
+
+- 界面与逻辑完美分离：用QML来定义界面，用C++来实现界面的响应逻辑。
+- 通常的做法是，当用户在界面上操作的时候，我们从qml文件里面调用C++的响应函数。
+- 应用MVC方便：用QML来描绘界面(View)，用C++代码来实现Model 和 Controller。
+- 自定义控件容易：可以用C++来自定义自己的QML类型， 然后将它应用于我们的应用程序中。
+- 可以在程序运行时访问或修改QML对象的属性进而改变界面的显示
 
 
 
 
 
 # 一些网址
+[官方教程](http://doc.qt.io/qt-5/qmlapplications.html)
+
 
 [qml中文资料](https://github.com/cwc1987/QmlBook-In-Chinese)
 
